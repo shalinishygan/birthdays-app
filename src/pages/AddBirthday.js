@@ -2,36 +2,13 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addBirthday } from '../redux/birthdaysSlice';
-import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-
-const FormContainer = styled.div`
-    padding: 20px;
-    max-width: 500px;
-    margin: 0 auto;
-`;
-
-const Input = styled.input`
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-`;
-
-const Button = styled.button`
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-`;
+import './styles.css'; // Import styles
 
 const AddBirthday = () => {
     const [name, setName] = useState('');
     const [date, setDate] = useState('');
-    const [image, setImage] = useState(''); // URL to an image
+    const [image, setImage] = useState('');
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -46,35 +23,49 @@ const AddBirthday = () => {
         };
 
         dispatch(addBirthday(newBirthday));
-        navigate('/'); // Redirect to home page after adding
+        navigate('/');
     };
 
     return (
-        <FormContainer>
+        <div className="add-birthday-form">
             <h2>Add Birthday</h2>
             <form onSubmit={handleSubmit}>
-                <Input
-                    type="text"
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-                <Input
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    required
-                />
-                <Input
-                    type="url"
-                    placeholder="Image URL"
-                    value={image}
-                    onChange={(e) => setImage(e.target.value)}
-                />
-                <Button type="submit">Add Birthday</Button>
+                <div className="form-group">
+                    <label className="form-label">Name:</label>
+                    <input
+                        type="text"
+                        className="form-input"
+                        placeholder="Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label className="form-label">Birthday:</label>
+                    <input
+                        type="date"
+                        className="form-input"
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label className="form-label">Image URL:</label>
+                    <input
+                        type="url"
+                        className="form-input"
+                        placeholder="Image URL"
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
+                    />
+                </div>
+                <button type="submit" className="form-button">
+                    Add Birthday
+                </button>
             </form>
-        </FormContainer>
+        </div>
     );
 };
 
