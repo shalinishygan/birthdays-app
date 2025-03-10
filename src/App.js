@@ -8,7 +8,7 @@ import './App.css'; // Import the CSS
 function App() {
     return (
         <div className="app-container">  {/* Add a container for overall styling */}
-            <Router>
+            <Router basename="/birthdays-app">
                 <nav className="navbar">
                     <ul>
                         <li><Link to="/">Home</Link></li>
